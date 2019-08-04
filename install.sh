@@ -24,7 +24,7 @@ echo "Completed.\n"
 echo "Installing apps via brew cask..."
 brew tap homebrew/cask-fonts
 brew cask install iterm2 atom docker minikube
-# brew cask install font-meslo-nerd-font font-hack-nerd-font
+brew cask install font-hack-nerd-font font-hack-nerd-font-mono font-dejavusansmono-nerd-font font-dejavusansmono-nerd-font-mono
 echo "Completed.\n"
 
 # Install Oh-My-Zsh
@@ -84,9 +84,13 @@ if [[ "${?}" -ne 0 ]]; then
   echo "Completed.\n"
 fi
 
+echo "Installing SpaceVim..."
+curl -sLf https://spacevim.org/install.sh | bash
+rm ~/.SpaceVim.d/init.toml && ln -h ~/dotfiles/init.toml ~/.SpaceVim.d/
+echo "Completed.\n"
 
 echo "All Done!\n"
 
 echo "Todo Lists:\n"
-echo "  * iTerm2 -> Preference -> Profiles -> Text -> Font, Select one of the Powerline Font, eg. Meslo\n"
+echo "  * iTerm2 -> Preference -> Profiles -> Text -> Font, Select one of the Powerline Font, eg. Hack Nerd Font Mono\n"
 echo "  * iTerm2 -> Preference -> Profiles -> Colors -> Color Presets -> Import..., Import ~/MaterialDark.itermcolors and set it as color scheme\n"
