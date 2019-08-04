@@ -7,18 +7,13 @@ echo "Installing XCode Commandline Tool..."
 xcode-select --install
 echo "Completed.\n"
 
-# Install Miniconda3
-echo "Downloading Miniconda3..."
-curl -o miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh >/dev/null 2>&1
-
-echo "Installing Miniconda3..."
-bash Miniconda3-latest-MacOSX-x86_64.sh -b -f -p ~/miniconda3
-echo "Completed.\n"
-
 # Install Homebrew
-echo "Installing Homebrew..."
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-echo "Completed.\n"
+command -v brew &>/dev/null
+if [[ "${?}" -ne 0 ]]; then
+  echo "Installing Homebrew..."
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  echo "Completed.\n"
+fi
 
 # Install apps
 echo "Downloading apps via brew..."
@@ -64,4 +59,15 @@ echo "Completed.\n"
 
 # Soft link to own zshrc
 rm -f ~/.zshrc && ln -s ~/dotfiles/.zshrc ~/.zshrc
+
+# Install Miniconda3
+command -v conda &>/dev/null
+if [[ "${?}" -ne 0 ]]; then
+  echo "Downloading Miniconda3..."
+  curl -o miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh >/dev/null 2>&1
+  echo "Installing Miniconda3..."
+  bash Miniconda3-latest-MacOSX-x86_64.sh -b -f -p ~/miniconda3
+  echo "Completed.\n"
+fi
+
 echo "All Done!\n"
