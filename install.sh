@@ -23,7 +23,8 @@ echo "Completed.\n"
 # Install font repo
 echo "Installing apps via brew cask..."
 brew tap homebrew/cask-fonts
-brew cask install iterm2 atom font-meslo-nerd-font font-hack-nerd-font
+brew cask install iterm2 atom docker minikube
+# brew cask install font-meslo-nerd-font font-hack-nerd-font
 echo "Completed.\n"
 
 # Install Oh-My-Zsh
@@ -58,7 +59,7 @@ echo "Completed.\n"
 
 # Download Material Dark Color Scheme
 echo "Installing Material Design Color Scheme..."
-curl -O https://github.com/mbadolato/iTerm2-Color-Schemes/blob/master/schemes/MaterialDark.itermcolors
+curl https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/schemes/MaterialDark.itermcolors > ./MaterialDark.itermcolors
 echo "Completed.\n"
 
 # Soft link to own zshrc
@@ -70,8 +71,22 @@ if [[ "${?}" -ne 0 ]]; then
   echo "Downloading Miniconda3..."
   curl -o miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
   echo "Installing Miniconda3..."
-  bash Miniconda3-latest-MacOSX-x86_64.sh -b -f -p ~/miniconda3
+  chmod 400 miniconda.sh && bash miniconda.sh -b -f -p ~/miniconda3
   echo "Completed.\n"
 fi
 
+# Install aws-cli, azure-cli
+source ~/.zshrc
+which pip | grep miniconda3 &>/dev/null
+if [[ "${?}" -ne 0 ]]; then
+  echo "Installing aws-cli, azure-cli..."
+  pip install awscli azure-cli
+  echo "Completed.\n"
+fi
+
+
 echo "All Done!\n"
+
+echo "Todo Lists:\n"
+echo "  * iTerm2 -> Preference -> Profiles -> Text -> Font, Select one of the Powerline Font, eg. Meslo\n"
+echo "  * iTerm2 -> Preference -> Profiles -> Colors -> Color Presets -> Import..., Import ~/MaterialDark.itermcolors and set it as color scheme\n"
