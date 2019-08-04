@@ -27,9 +27,11 @@ brew cask install iterm2 atom font-meslo-nerd-font font-hack-nerd-font
 echo "Completed.\n"
 
 # Install Oh-My-Zsh
-echo "Installing Oh-My-Zsh..."
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-echo "Completed.\n"
+if [[ ! -d "~/.oh-my-zsh" ]]; then
+  echo "Installing Oh-My-Zsh..."
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  echo "Completed.\n"
+fi
 
 # Switch shell
 echo "Setting zsh as default shell"
@@ -37,11 +39,13 @@ chsh -s /bin/zsh
 echo "Completed.\n"
 
 # Oh-My-Zsh Themes
-echo "Downloading Oh-My-Zsh Themes..."
-git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" && \
-    ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
-git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
-echo "Completed.\n"
+if [[ ! -d "~/.oh-my-zsh/custom/themes/spaceship-prompt" ]]; then
+  echo "Downloading Oh-My-Zsh Themes..."
+  git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" && \
+      ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+  git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+  echo "Completed.\n"
+fi
 
 # Install fonts
 echo "Installing Powerline Fonts..."
@@ -64,7 +68,7 @@ rm -f ~/.zshrc && ln -s ~/dotfiles/.zshrc ~/.zshrc
 command -v conda &>/dev/null
 if [[ "${?}" -ne 0 ]]; then
   echo "Downloading Miniconda3..."
-  curl -o miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh >/dev/null 2>&1
+  curl -o miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
   echo "Installing Miniconda3..."
   bash Miniconda3-latest-MacOSX-x86_64.sh -b -f -p ~/miniconda3
   echo "Completed.\n"
