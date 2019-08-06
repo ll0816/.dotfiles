@@ -44,7 +44,7 @@ if [[ ! -d "~/.oh-my-zsh/custom/themes/spaceship-prompt" ]]; then
   echo "Downloading Oh-My-Zsh Themes..."
   git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" && \
       ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
-  git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+#  git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
   echo "Completed.\n"
 fi
 
@@ -57,8 +57,8 @@ cd ..
 rm -rf fonts
 echo "Completed.\n"
 
-echo "Downloading Powerline Symbols..."
-curl -O https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
+#echo "Downloading Powerline Symbols..."
+#curl -O https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
 
 # Download Material Dark Color Scheme
 echo "Installing Material Design Color Scheme..."
@@ -66,7 +66,10 @@ curl https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/sch
 echo "Completed.\n"
 
 # Soft link to own zshrc
-rm -f ~/.zshrc && ln -s ~/.dotfiles/.zshrc
+if [[ -f ~/.zshrc ]]; then
+  mv ~/.zshrc ~/.zshrc.old
+fi
+ln -s ~/.dotfiles/.zshrc
 
 # Install Miniconda3
 command -v conda &>/dev/null
@@ -79,7 +82,8 @@ if [[ "${?}" -ne 0 ]]; then
 fi
 
 # Install aws-cli, azure-cli
-source ~/.zshrc
+# First source ~/.zshrc to include just installed miniconda
+. ~/.zshrc
 which pip | grep miniconda3 &>/dev/null
 if [[ "${?}" -ne 0 ]]; then
   echo "Installing aws-cli, azure-cli..."
@@ -89,17 +93,21 @@ fi
 
 echo "Installing SpaceVim..."
 curl -sLf https://spacevim.org/install.sh | bash
-rm ~/.SpaceVim.d/init.toml && ln -h ~/.dotfiles/init.toml ~/.SpaceVim.d/
+mkdir ~/.SpaceVim.d/ && ln -h ~/.dotfiles/init.toml ~/.SpaceVim.d/
 echo "Completed.\n"
 
 echo "Soft linking tmux config"
+if [[ -f ~/.tmux.conf ]]; then
+  echo "Renamed ~/.tmux.conf as ~/.tmux.conf.old"
+  mv ~/.tmux.conf ~/.tmux.conf.old
+fi
 ln -s ~/.dotfiles/.tmux.conf
-ln -s ~/.dotfiles/.tmux.conf.local
+ln -sf ~/.dotfiles/.tmux.conf.local
 
 echo "All Done!\n"
 
 echo "Todo Lists:\n"
 echo "  * iTerm2 -> Preference -> Profiles -> Text -> Font, Select one of the Powerline Font, eg. Hack Nerd Font Mono\n"
 echo "  * iTerm2 -> Preference -> Profiles -> Colors -> Color Presets -> Import..., Import ~/MaterialDark.itermcolors and set it as color scheme\n"
-echo "  * cd ${HOME} -> PowerlineSymbols.otf -> Click to install"
+# echo "  * cd ${HOME} -> PowerlineSymbols.otf -> Click to install"
 echo "  * iTerm2 -> Preference -> Profiles -> Text -> Check 'Use a different font for non-ASCII text' -> Select Hack Nerd Font Mono"
