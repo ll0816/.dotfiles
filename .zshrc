@@ -131,13 +131,6 @@ export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
 
 #Alias
 alias ca='conda activate'
-alias ga='git add'
-alias gc='git commit'
-alias gps='git push'
-alias gpu='git pull'
-alias gl='git log --graph'
-alias gf='git fetch'
-alias gs='git status'
 alias sz='source ~/.zshrc'
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
