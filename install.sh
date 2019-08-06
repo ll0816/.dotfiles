@@ -63,7 +63,7 @@ curl https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/sch
 echo "Completed.\n"
 
 # Soft link to own zshrc
-rm -f ~/.zshrc && ln -s ~/dotfiles/.zshrc ~/.zshrc
+rm -f ~/.zshrc && ln -s ~/dotfiles/.zshrc
 
 # Install Miniconda3
 command -v conda &>/dev/null
@@ -88,6 +88,10 @@ echo "Installing SpaceVim..."
 curl -sLf https://spacevim.org/install.sh | bash
 rm ~/.SpaceVim.d/init.toml && ln -h ~/dotfiles/init.toml ~/.SpaceVim.d/
 echo "Completed.\n"
+
+echo "Soft linking tmux config"
+ln -s ~/dotfiles/.tmux.conf
+ln -s ~/dotfiles/.tmux.conf.local
 
 echo "All Done!\n"
 
