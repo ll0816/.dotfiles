@@ -17,7 +17,7 @@ fi
 
 # Install apps
 echo "Downloading apps via brew..."
-brew install zsh zsh-syntax-highlighting tmux htop go kubernetes-cli kubernetes-helm openssl
+brew install zsh zsh-syntax-highlighting tmux htop go kubernetes-cli kubernetes-helm openssl reattach-to-user-namespace
 echo "Completed.\n"
 
 # Install font repo
@@ -56,6 +56,9 @@ cd fonts
 cd ..
 rm -rf fonts
 echo "Completed.\n"
+
+echo "Downloading Powerline Symbols..."
+curl -O https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
 
 # Download Material Dark Color Scheme
 echo "Installing Material Design Color Scheme..."
@@ -98,3 +101,5 @@ echo "All Done!\n"
 echo "Todo Lists:\n"
 echo "  * iTerm2 -> Preference -> Profiles -> Text -> Font, Select one of the Powerline Font, eg. Hack Nerd Font Mono\n"
 echo "  * iTerm2 -> Preference -> Profiles -> Colors -> Color Presets -> Import..., Import ~/MaterialDark.itermcolors and set it as color scheme\n"
+echo "  * cd ${HOME} -> PowerlineSymbols.otf -> Click to install"
+echo "  * iTerm2 -> Preference -> Profiles -> Text -> Check 'Use a different font for non-ASCII text' -> Select Hack Nerd Font Mono"
