@@ -33,7 +33,7 @@ fi
 
 # Install apps
 echo "Downloading apps via brew"
-brew install zsh zsh-syntax-highlighting tmux htop go kubernetes-cli kubernetes-helm openssl reattach-to-user-namespace 2> /dev/null &
+brew install zsh zsh-syntax-highlighting tmux htop go kubernetes-cli kubernetes-helm openssl reattach-to-user-namespace cassandra 2> /dev/null &
 spinner
 
 # Install font repo
@@ -84,7 +84,7 @@ spinner
 if [[ -f ~/.zshrc ]]; then
   mv ~/.zshrc ~/.zshrc.old
 fi
-ln -s ~/.dotfiles/.zshrc
+ln -s ~/.dotfiles/.zshrc ~
 
 # Install Miniconda3
 command -v conda &> /dev/null
@@ -99,11 +99,11 @@ fi
 
 # Install aws-cli, azure-cli
 # First source ~/.zshrc to include just installed miniconda
-. ~/.zshrc
-which pip | grep miniconda3 &> /dev/null
+ ~/.zshrc
+command -v pip | grep miniconda3 &> /dev/null
 if [[ "${?}" -ne 0 ]]; then
-  echo "Installing aws-cli, azure-cli"
-  pip install awscli azure-cli 2> /dev/null &
+  echo "Installing python packages"
+  pip install awscli azure-cli ipykernel jupyterlab 2> /dev/null &
   spinner
 fi
 
@@ -117,8 +117,8 @@ if [[ -f ~/.tmux.conf ]]; then
   echo "Renamed ~/.tmux.conf as ~/.tmux.conf.old"
   mv ~/.tmux.conf ~/.tmux.conf.old
 fi
-ln -s ~/.dotfiles/.tmux.conf
-ln -sf ~/.dotfiles/.tmux.conf.local
+ln -s ~/.dotfiles/.tmux.conf ~
+ln -sf ~/.dotfiles/.tmux.conf.local ~
 echo "Done"
 
 echo "All Done!\n"
@@ -127,3 +127,4 @@ echo "Todo Lists:\n"
 echo "  * iTerm2 -> Preference -> Profiles -> Text -> Font, Select one of the Powerline Font, eg. Hack Nerd Font Mono\n"
 echo "  * iTerm2 -> Preference -> Profiles -> Colors -> Color Presets -> Import, Import ~/MaterialDark.itermcolors and set it as color scheme\n"
 echo "  * iTerm2 -> Preference -> Profiles -> Text -> Check 'Use a different font for non-ASCII text' -> Select Hack Nerd Font Mono"
+echo "  * https://www.oracle.com/technetwork/java/javase/downloads/index.html -> Download JDK 8, required by Cassandra"

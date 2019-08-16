@@ -78,6 +78,8 @@ export EDITOR='vim'
 alias zc="vi ~/.zshrc"
 alias ca='conda activate'
 alias sz='source ~/.zshrc'
+alias bs='brew services'
+alias ki='ipython kernel install --name'
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
