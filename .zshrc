@@ -74,12 +74,13 @@ export EDITOR='vim'
 # export ARCHFLAGS="-arch x86_64"
 
 # Set personal aliases
-# Example aliases
 alias zc="vi ~/.zshrc"
 alias ca='conda activate'
 alias sz='source ~/.zshrc'
 alias bs='brew services'
-alias ki='ipython kernel install --name'
+alias ki='python -m ipykernel install --user --name'
+alias kgh='k get hpa'
+alias kdh='k describe hpa'
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
