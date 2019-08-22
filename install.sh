@@ -33,7 +33,8 @@ fi
 
 # Install apps
 echo "Downloading apps via brew"
-brew install zsh zsh-syntax-highlighting tmux htop go kubernetes-cli kubernetes-helm openssl reattach-to-user-namespace cassandra 2> /dev/null &
+brew install zsh zsh-syntax-highlighting tmux htop go kubernetes-cli kubernetes-helm openssl reattach-to-user-namespace \
+  cassandra awscli azure-cli 2> /dev/null &
 spinner
 
 # Install font repo
@@ -97,13 +98,12 @@ if [[ "${?}" -ne 0 ]]; then
   spinner
 fi
 
-# Install aws-cli, azure-cli
 # First source ~/.zshrc to include just installed miniconda
  ~/.zshrc
 command -v pip | grep miniconda3 &> /dev/null
 if [[ "${?}" -ne 0 ]]; then
   echo "Installing python packages"
-  pip install awscli azure-cli ipykernel jupyterlab 2> /dev/null &
+  pip install ipykernel jupyterlab 2> /dev/null &
   spinner
 fi
 
