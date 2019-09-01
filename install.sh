@@ -34,7 +34,7 @@ fi
 # Install apps
 echo "Downloading apps via brew"
 brew install zsh zsh-syntax-highlighting tmux htop go kubernetes-cli kubernetes-helm openssl reattach-to-user-namespace \
-  cassandra awscli azure-cli 2> /dev/null &
+  thefuck cmatrix cassandra awscli azure-cli 2> /dev/null &
 spinner
 
 # Install font repo

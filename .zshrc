@@ -81,6 +81,7 @@ alias bs='brew services'
 alias ki='python -m ipykernel install --user --name'
 alias kgh='k get hpa'
 alias kdh='k describe hpa'
+alias cm='cmatrix'
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -112,5 +113,5 @@ export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-
-
+# Add thefuck
+eval $(thefuck --alias)
